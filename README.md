@@ -4,7 +4,7 @@ Early Hammer is the name given to the scenario in World 2 when the Boomerang Bro
 
 The Boomerang Brothers in  World 2 start out in the following positions:
 
-[pic]
+[](images/w2-bros-starting-lg.png)
 
 # No-death Early Hammer
 
