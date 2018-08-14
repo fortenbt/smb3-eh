@@ -16,7 +16,7 @@ After completing 2-1, the Hammer must move up and the Music Box must move to the
 
 After 2-2, the Hammer must go up again, and the Music Box must end up between the mushroom house and 2-4.
 
-[pic showing how each bro can move after 2-2]
+![World 2 Hammer Brothers' Post-2-2 positions](images/w2-bros-post-2-2-lg.png)
 
 After 2-fort, the Hammer must go left across 2-4, and the Music box must move to the mushroom house and back so that both the Hammer and Music Box end up on the same tile. At this point, they have the chance to walk together down to 2-sun, left twice to 2-3, and then split so that both end up accessible to the player without playing 2-3.
 
