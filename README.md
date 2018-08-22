@@ -41,7 +41,9 @@ There are a couple exceptions to the array being shifted on _every_ frame (most 
 
 After a level ends, the game transitions through a number of states to clean things up and get ready for the player to move around on the overworld map. During the first of these states, an initial direction is chosen for the Hammer Brother to face. To decide which direction the Hammer Brother faces, the byte corresponding to the Hammer Brother's object index is chosen from the random number array. The random number array is indexed off of the second byte so that the first byte is not used. The two least-significant bits from the random byte chosen for the given hammer brother are used to determine the direction it is facing. 0 = Right, 1 = Left, 2 = Down, and 3 = Up. 
 
-![Choosing which way the hammer brothers should face](images/face.gif)
+| ![Choosing which way the hammer brothers should face](images/face.gif) |
+|:--:|
+| *The Hammer Brothers' facing direction is chosen before the level card is flipped.* |
 
 However, the hammer brother sprites can only face left or right, since there is no up- or down-facing sprite. If the Hammer Brother is facing Right (0), the right-facing sprite will be used. In all other cases, the left-facing sprite will be used. So although the hammer brother may look like it is facing left, its true direction may be left, down, or up. This is important because a hammer brother will choose to march in the opposite direction of the way it is facing only if it has tried to move in all the other directions first.
 
