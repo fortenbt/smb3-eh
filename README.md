@@ -20,6 +20,8 @@ After 2-2, the Hammer must go up again, and the Music Box must end up between th
 
 After 2-fort, the Hammer must go left across 2-4, and the Music box must move to the mushroom house and back so that both the Hammer and Music Box end up on the same tile. At this point, they have the chance to walk together down to 2-sun, left twice to 2-3, and then split so that both end up accessible to the player without playing 2-3.
 
+![World 2 Hammer Brothers' Post-2-Fort positions](images/w2-bros-post-2-f-lg.png)
+
 # Hammer Brother Movement Mechanics and Rules
 
 Hammer Brothers and other overworld map objects (the HELP sprite, the World 7 nippers, the spade card game, etc) are tracked in an array of up to 15 different objects. Each object is referenced by its index into the array. The World 2 Boomerang Brothers are index 2 and 3.
