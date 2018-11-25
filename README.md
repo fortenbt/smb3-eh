@@ -12,7 +12,7 @@ A no-death Early Hammer is the situation where the Hammer moves across 2-3 after
 
 After completing 2-1, the Hammer must move up and the Music Box must move to the right (he can go either up or down at 2-sun, it doesn't matter).
 
-[pic showing how each bro can move after 2-1]
+![World 2 Hammer Brothers' Post-2-1 positions](images/w2-bros-post-2-1-lg.png)
 
 After 2-2, the Hammer must go up again, and the Music Box must end up between the mushroom house and 2-4.
 
