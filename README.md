@@ -26,7 +26,9 @@ After 2-fort, the Hammer must go left across 2-4, and the Music box must move to
 
 Hammer Brothers and other overworld map objects (the HELP sprite, the World 7 nippers, the spade card game, etc) are tracked in an array of up to 15 different objects. Each object is referenced by its index into the array. The World 2 Boomerang Brothers are index 2 and 3.
 
-![Overworld Map Object Arrray](images/object-array.png)
+| ![Overworld Map Object Arrray](images/object-array.png) |
+|:--:|
+| *Super Mario Bros. 3's object array for World 2* |
 
 Hammer Brother movement is determined by the random number array on multiple frames. Mario 3's random numbers are stored in a 9-byte array. The 72-bits of the 9-byte array are shifted right through the array, with input bits being determined by an XOR-feedback of bit 6 and 14. On each frame, the bits are shifted right once.
 
