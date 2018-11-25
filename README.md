@@ -32,7 +32,10 @@ Hammer Brothers and other overworld map objects (the HELP sprite, the World 7 ni
 
 Hammer Brother movement is determined by the random number array on multiple frames. Mario 3's random numbers are stored in a 9-byte array. The 72-bits of the 9-byte array are shifted right through the array, with input bits being determined by an XOR-feedback of bit 6 and 14. On each frame, the bits are shifted right once.
 
-![Random Number Array](images/rng.gif)
+| ![Random Number Array](images/rng.gif) |
+|:--:|
+| *The array of random numbers are shifted on each frame.* |
+
 
 There are a couple exceptions to the array being shifted on _every_ frame (most notably, lag frames), but that is outside the scope of this document. Although the random number array contains 9 bytes, the very first one is never used, most likely due to its functionality as the "seed" byte. When needing a single random number check, the game typically looks at the second byte in the array.
 
