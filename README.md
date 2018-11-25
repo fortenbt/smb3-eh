@@ -28,9 +28,11 @@ Hammer Brothers and other overworld map objects (the HELP sprite, the World 7 ni
 
 ![Overworld Map Object Arrray](images/object-array.png)
 
-Hammer Brother movement is determined by the random number array on multiple frames. Mario 3's random numbers are stored in a 9-byte array. The 72-bits of the 9-byte array are shifted right through the array, with input bits being determined by an XOR-feedback of bit 6 and 14. On each frame, the bits are shifted right once. There are a couple exceptions to this (most notably, lag frames), but that is outside the scope of this document. Although the random number array contains 9 bytes, the very first one is never used, most likely due to its functionality as the "seed" byte. When needing a single random number check, the game typically looks at the second byte in the array.
+Hammer Brother movement is determined by the random number array on multiple frames. Mario 3's random numbers are stored in a 9-byte array. The 72-bits of the 9-byte array are shifted right through the array, with input bits being determined by an XOR-feedback of bit 6 and 14. On each frame, the bits are shifted right once.
 
 ![Random Number Array](images/rng.gif)
+
+There are a couple exceptions to the array being shifted on _every_ frame (most notably, lag frames), but that is outside the scope of this document. Although the random number array contains 9 bytes, the very first one is never used, most likely due to its functionality as the "seed" byte. When needing a single random number check, the game typically looks at the second byte in the array.
 
 After a level ends, the game transitions through a number of states to clean things up and get ready for the player to move around on the overworld map. During one of these states, an initial direction is chosen for the Hammer Brother to face. In a later state, the Hammer Brother movement is decided, possibly requiring the Hammer Brother to move multiple times. To decide which direction the Hammer Brother faces, the byte corresponding to the Hammer Brother's object index is chosen from the random number array. The random number array is indexed off of the second byte so that the first byte is not used. The two least-significant bits from the random byte chosen for the given hammer brother are used to determine the direction it is facing. 0 = Right, 1 = Left, 2 = Down, and 3 = Up. 
 
