@@ -3,17 +3,17 @@
 layout: list
 
 # The title of the tag's page.
-title: SMB3 Mechanics
+title: Early Hammer Manipulation
 
 # The name of the tag, used in a post's front matter (e.g. tags: [<slug>]).
-slug: smb3mechanics
+slug: eh-manipulation
 
 # (Optional) Write a short (~150 characters) description of this featured tag.
 description: >
-  These posts dig deep into the internals of specific parts of Super Mario Bros 3.
-  They typically attempt to explain how one part of the game works.
+  These posts describe the history and technical details of the Early Hammer
+  Manipulation strategy for the SMB3 Warpless speedrun category.
 
 # Setting `menu` will generate an entry in the sidebar for this tag.
 menu: true
-order: 2
+order: 1
 ---
