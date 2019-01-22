@@ -389,7 +389,9 @@ bool Map_MarchValidateTravel(uint8_t objid, struct move_info dirs)
             continue;
         }
         /* Chose the needed direction */
-        printf("        %s: chose %s\n", objid==HAMMER?"HAMMER":"MUSIC BOX", DIRSTRS[direction]);
+        if (g_verbose) {
+            printf("        %s: chose %s\n", objid==HAMMER?"HAMMER":"MUSIC BOX", DIRSTRS[direction]);
+        }
         Map_Object_Data[objid] = direction;
         return true;
     }
