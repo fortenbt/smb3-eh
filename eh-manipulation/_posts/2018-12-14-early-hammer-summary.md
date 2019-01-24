@@ -125,7 +125,7 @@ level.
 
 Alright, we got somewhere. It looked like everything boiled down to which byte was
 grabbed from the `RandomN` array in the code. The next step was to look into that. I
-completed a lot of research and published my [Look Ma, No Hands!]({{ site.baseurl}}/smb3mechanics/2018-11-05-no-hands)
+completed a lot of research and published my [Look Ma, No Hands!]({{ site.baseurl}}/smb3mechanics/2018-11-05-no-hands/)
 article detailing possible RNG manipulation strategies to avoid the hand levels. The
 basic conclusion was that, due to lag frames and how long it took to get to the hands,
 manipulating RNG to avoid the hand levels for the Warpless category was not feasible.
@@ -184,7 +184,7 @@ previous world record run that contained a 1-death early hammer and no hands. Th
 run can be seen [here](https://www.speedrun.com/smb3/run/zp06548m).
 
 The description of the hammer brother movement mechanics was already posted in my
-[Early Hammer post]({{ site.baseurl }}/smb3mechanics/2018-08-22-early-hammer), and
+[Early Hammer post]({{ site.baseurl }}/smb3mechanics/2018-08-22-early-hammer/), and
 the next few posts in this category will go in depth into the rest of the research
 behind the Early Hammer Manipulation strategy development. I'll also be releasing a
 set of TASes and LUA helper scripts that will be tailored for multiple skill levels
