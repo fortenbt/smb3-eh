@@ -166,7 +166,7 @@ and other SMB3 internals that affected when those movement decisions were made.
 I looked into how the end-level card is spawned and how it and the in-game timer may
 affect the frame on which the level ends.
 
-I wrote a lot of [code](https://github.com/fortenbt/smb3-eh/blob/eh-manip/src/smb3rngchk.c)
+I wrote a lot of [code](https://github.com/fortenbt/smb3-eh/blob/master/src/smb3rngchk.c)
 that simulated the random number generator and the hammer brother movement decision
 code in order to find the best possible windows of frames to jump to hit the cards
 and the orb at the end of 2-1, 2-2, and 2-fort.
