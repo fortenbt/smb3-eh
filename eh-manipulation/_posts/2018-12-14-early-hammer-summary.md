@@ -132,14 +132,14 @@ manipulating RNG to avoid the hand levels for the Warpless category was not feas
 
 ### MitchFlowerPower's Early Hammer Manipulation
 
-Right as I was finishing this paper, I was still watching Mitch speedrun Super Mario
-Bros. 3. He had switched back to attempting Warpless at this point, and he had a new
-strategy, something he called Early Hammer Manipulation. He created a TAS that got a
-large hammer brother movement in World 2 where the Music Box bro and the Hammer bro
-switched positions after a quick death in 2-fort. His strategy to get the right
-movements was to play while watching the TAS, synchronizing the start of his TAS with
-powering on his NES, and then playing through to World 2 and trying to get the same
-hammer brother movements. He would stop and wait at the end of level 2-1 and level
+Right as I was finishing the No Hands article, I was still watching Mitch speedrun
+Super Mario Bros. 3. He had switched back to attempting Warpless at this point, and he
+had a new strategy, something he called Early Hammer Manipulation. He created a TAS
+that got a large hammer brother movement in World 2 where the Music Box bro and the
+Hammer bro switched positions after a quick death in 2-fort. His strategy to get the
+right movements was to play while watching the TAS, synchronizing the start of his TAS
+with powering on his NES, and then playing through to World 2 and trying to get the
+same hammer brother movements. He would stop and wait at the end of level 2-1 and level
 2-2 and then jump at the same time as the TAS so that he hopefully hit the end level
 card on the same frame. He then showed a strategy to get a consistent death in 2-fort
 that would cause the Hammer bro to move down and left to end up just to the right of
