@@ -49,7 +49,12 @@ and 23,081.
 Frame number 12,256 occurs roughly 4 minutes (slightly longer than you may
 have calculated due to lag frames) after reset, which is not long enough to get to
 World 2 and complete 2-fort. Therefore, the only option is to use frame 23,081,
-which occurs roughly 6 and a half minutes after reset, right about when we need it.
+which occurs roughly 6 and a half minutes after reset, a little after when we need
+it. This is fine, however, because the RNG begins ticking at reset of the NES,
+but the speedrun time doesn't begin until a player presses start to select the
+number of players. We can wait a bit at the title screen before pressing start
+in order to use up any time we need so that the correct 2-fort frame ends up
+exactly when we need it.
 
 In order to end 2-fort on this frame, the TAS was made and the frame on which
 Mario jumps to grab the orb after killing the boom boom was changed a frame at
@@ -179,4 +184,61 @@ frame, the TAS was made to hit the 2-frame window within the 4/6 window.
 Early on in the process of developing the early hammer manipulation TASes, Mitch
 was having trouble trying to find a visual cue to show him on which frame to
 press A to hit the end-of-level card. Initially, I had created the TAS to have
-Mario jump three times before hitting the card.
+Mario jump three times before hitting the card. This worked fairly well, but
+there were a couple issues. In some cases, there wasn't enough time before the
+final jump to have Mario in position and jump three times, and the jumping
+visual cue was also problematic because it was inherently a couple of frames off
+from when Mitch should be jumping.
+
+![Mario jumping visual cue]({{ site.baseurl }}/images/jump-visual.gif)
+*The in-game jumping visual cue was not quite perfect...*
+{:.figure}
+
+When a button is pressed on the controller, the input is registered right after
+loading the graphics to be drawn on the next frame. The input then causes the
+sprites to be updated during that same frame. After the next frame is drawn, the
+graphics for the frame during which the button was pressed are loaded. Those
+graphics then get drawn on the next frame. So all input presses are visually roughly
+two frames behind those frames being drawn. This can be seen in the following video.
+
+<p>
+<iframe src="{{ site.baseurl }}/images/controller/controller.mp4" width="777" height="437"></iframe>
+</p>
+*Showing the visual delay between controller input and the frame being drawn.*
+{:.figure}
+
+Because of this delay, I decided to create a Lua script that could be run on the
+emulator that is playing back the TAS. The emulator allows Lua scripts to draw
+things on the screen on exactly whichever frame is desired, so if we wanted a
+visual cue exactly on frame 17,821, we could do that with the Lua script.
+
+My first thought was to have some sort of progress bar displayed with orbs at
+certain percentages that would change color to provide a "beat" to the progress
+bar filling up. The 100% mark would occur on the frame the player was required
+to jump. When looking at [FCEUX's provided Lua API](http://www.fceux.com/web/help/fceux.html?LuaScripting.html),
+I decided a custom progress bar with cool graphics wasn't really going to be an
+option. The quickest thing to develop and get over to Mitch to try was just
+drawing boxes that filled in towards the middle of the screen on a beat. The
+middle box filled in on the exact frame that was needed to.
+
+![Visual cue Lua boxes]({{ site.baseurl }}/images/box-lua.gif)
+*This is the current visual cue Mitch uses for Early Hammer Manipulation*
+{:.figure}
+
+#### Improvements
+
+There are definitely improvements that could be made to the Lua script for anyone
+who wants to take the time. I would love to get some audio cue that actually
+plays a beat along with the boxes changing color. That could be a fairly simple
+change that goes a long way to making it a lot easier to use accurately.
+
+Ideally, we would have some custom graphics to show as nice of a visual cue as
+possible. The biggest problem is that it must be synced frame-perfect with the
+TAS, and it can't cause any lag or slowdown of the emulator. At one point, I had
+modified the boxes to be a bar that fills in, but that didn't provided the "beat"
+I thought was important from the boxes. One improvement could be to combine the
+bar filling in with audio and visual beats like I had originally wanted.
+
+![Visual cue Lua bar]({{ site.baseurl }}/images/bar-lua.gif)
+*At one point I had a bar that filled in, but it wasn't as good as the boxes.*
+{:.figure}
