@@ -28,8 +28,8 @@ FCEUX version 2.2.3 be used to run the TAS and the Lua scripts.
 {:.figure}
 
 The TAS was made for the PRG0 version of the Super Mario Bros. 3 ROM. Although
-it shouldn't affect it if PRG1 is used, it is recommened that the PRG0 version be
-used.
+there are very few substantive changes between the two ROMs, they have been
+known to desynch from the TAS if the wrong ROM is used.
 
 The Lua script is a script that was written for FCEUX's Lua API. It draws
 transparent boxes across the top of the screen that fill in once the jump frame is
@@ -76,7 +76,7 @@ the dropdown, click `Browse`, and then navigate to where you downloaded the TAS.
 ### Loading the Lua Script
 
 Once the TAS is loaded, you can load the Lua script by going to
-`File...Lua...New Lua Script Windows...`. On the window that comes up, click `Browse`,
+`File...Lua...New Lua Script Window...`. On the window that comes up, click `Browse`,
 and navigate to where you downloaded the Lua script, select it, and click `Open`.
 Finally, click `Run`. Make sure you are running the correct Lua script for version of
 the TAS you are running so that the boxes match up with the frames on which to jump
@@ -117,21 +117,17 @@ where the hammer brothers move incorrectly.
 2-f: [good*, bad, good]
 ```
 
-<p>
 <a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/orange-nodeath-eh-v0.4.fm2">
-<img src="{{ site.baseurl }}/images/flower-card.png" width="256" height="256">
+    <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
 </a>
 *v0.4 TAS*
 {:.figure}
 
-<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/orange-nodeath-eh-v0.4.fm2">
-<img src="{{ site.baseurl }}/images/flower-card.png" width="256" height="256">
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/eh-helper-v0.4.lua">
+    <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
 </a>
-*v0.4 TAS*
+*v0.4 Lua script*
 {:.figure}
-
-</p>
-
 
 #### v0.5
 
@@ -144,3 +140,32 @@ seconds slower than `v0.4`.
 2-2: [good, good*, good, good]
 2-f: [good*, bad, good]
 ```
+
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.5/orange-nodeath-eh-v0.5.fm2">
+    <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
+</a>
+*v0.5 TAS*
+{:.figure}
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/eh-helper-v0.5.lua">
+    <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
+</a>
+*v0.5 Lua script*
+{:.figure}
+
+### Using the TASes
+
+In order to use the TAS successfully, you must do a couple things:
+
+First, your NES or emulator must be started at the exact same time as the emulator that is
+playing the TAS. If these are desynched at all, you'll be a frame or more off, giving you
+less of a chance of getting the manipulation.
+
+Second, it is not crucial for your gameplay to try to emulate the TAS's outside of delag
+strats. Obviously, you'll want to use the same delag strats as the TAS uses, but any other
+strategies to get ahead of the TAS are completely fine. However, this is only applicable
+up to World 2. When you start World 2, you need to try to enter 2-1 at the same time as
+the TAS. Due to the [in-game timer effects]({{ site.baseurl}}/eh-manipulation/2019-01-25-end-level-card/),
+you need to hit the card at the end of the level with the same in-game timer that the TAS
+does. The easiest way to achieve this is to attempt to enter the level at the same time.
+
+Mitch [posted a good tutorial on Early Hammer Manipulation](https://www.youtube.com/watch?v=2syj3j0Ye_E).
