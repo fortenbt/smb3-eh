@@ -100,6 +100,14 @@ The two TASes and Lua scripts I am releasing right now are versions `v0.4` and `
 I am not numbering them `v1.0` yet, as I am still not satisfied that they're as good
 as they can be.
 
+Because of github- and my jekyll them-related issues, I haven't been able to get the
+links below to download the files. You can right click the orange arrow next to the
+images and choose "Save link as..." in order to save the files.
+
+![Save link as]({{ site.baseurl }}/images/right-click.png)
+*Right click and Save link as...*
+{:.figure}
+
 #### v0.4
 
 `v0.4` is the version of the TAS that [Mitchflowerpower](https://twitch.tv/mitchflowerpower)
