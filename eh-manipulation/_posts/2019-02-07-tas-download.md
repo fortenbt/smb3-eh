@@ -100,7 +100,7 @@ The two TASes and Lua scripts I am releasing right now are versions `v0.4` and `
 I am not numbering them `v1.0` yet, as I am still not satisfied that they're as good
 as they can be.
 
-Because of github- and my jekyll them-related issues, I haven't been able to get the
+Because of github- and my jekyll theme-related issues, I haven't been able to get the
 links below to download the files. You can right click the orange arrow next to the
 images and choose "Save link as..." in order to save the files.
 
