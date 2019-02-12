@@ -117,13 +117,13 @@ where the hammer brothers move incorrectly.
 2-f: [good*, bad, good]
 ```
 
-<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/orange-nodeath-eh-v0.4.fm2">
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/orange-nodeath-eh-v0.4.fm2" download>
     <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
 </a>
 *v0.4 TAS*
 {:.figure}
 
-<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/eh-helper-v0.4.lua">
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/eh-helper-v0.4.lua" download>
     <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
 </a>
 *v0.4 Lua script*
@@ -141,12 +141,12 @@ seconds slower than `v0.4`.
 2-f: [good*, bad, good]
 ```
 
-<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.5/orange-nodeath-eh-v0.5.fm2">
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.5/orange-nodeath-eh-v0.5.fm2" download>
     <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
 </a>
 *v0.5 TAS*
 {:.figure}
-<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/eh-helper-v0.5.lua">
+<a href="https://github.com/fortenbt/smb3-eh/tree/master/tas/v0.4/eh-helper-v0.5.lua" download>
     <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
 </a>
 *v0.5 Lua script*
