@@ -70,6 +70,58 @@ for different formats to begin to find my way around. A few of these are listed 
 - [XBOX Executable (xbe) Loader](https://github.com/jonas-schievink/GhidraXBE)
 - [Mobicore Trustlet Loader](https://github.com/NeatMonster/mclf-ghidra-loader)
 
+One of the things I noticed was that none of the open source projects I found really did anything
+similar to loading multiple code blocks at the same virtual address, something that was required
+for the MMC3 banking construct. Turning to [Ghidra's documentation](https://ghidra.re/ghidra_docs/api/index.html),
+I found that it was really lacking for someone coming into the API completely new and looking to
+find an overview of the model or examples of how one might do different things.
+
+After clicking through much of their object model, trying to keep it all straight in my head
+(it's still confusing that you seem to be able to do the same thing from multiple different
+places within the object hierarchy), and after playing around with the memory space window in
+the GUI, it seemed like the best option would be to create a `MemoryBlock` for each bank, each
+one backed by the corresponding file contents of that bank.
+
+I immediately got an error during loading saying that I had overlapping memory blocks:
+
+```
+Failed to add language defined memory block due to conflict: STACK @ 0x0100, length=0x1ff
+```
+
+Wait a minute, though...that's a language-defined memory block called `STACK` at address
+`0x0100`. I didn't attempt to define that with my loader. Grepping through their source,
+I found some memory blocks defined in a file within a `language` directory called `6502.pspec`.
+This processor spec file defined multiple blocks of memory by default for any 6502 binary
+loaded into Ghidra. This was broken by default!
+
+The default memory blocks defined were:
+
+```xml
+  <default_memory_blocks>
+    <memory_block name="IO" start_address="0" length="0x20" initialized="false"/>
+    <memory_block name="LOW_RAM" start_address="0x20" length="0xff" initialized="false"/>
+    <memory_block name="STACK" start_address="0x0100" length="0x01ff" initialized="false"/>
+  </default_memory_blocks>
+```
+
+There was an "IO" block from `0x0` through `0x20`, "LOW_RAM" from `0x20` through...`0x1DF`?
+That had to be wrong. In the 6502 architecture, addresses `0x0` through `0xFF` are called
+the "zero page", because those addresses can be accessed with a single byte (the high
+address byte is zero). This would make sense to define a default memory block from `0x0` through
+`0xFF` called `LOW_RAM`, but this block started at `0x20` and its length was `0xFF`.
+Even if the starting address was `0x0`, the length of `0xFF` would set the memory block
+to addresses `0x0` through `0xFE`. Something was obviously overlooked.
+
+I guessed that there used to be a "LOW_RAM" block defined from `0x0` through `0xFF`, and that
+the `pspec` format used to specify `start_address` and `end_address`. At some point, there
+was a system with a 6502 processor that someone at the NSA was reverse engineering that had
+IO at addresses `0x0` through `0x20`, so they modified the `pspec` file to support this.
+
+Eventually, the `pspec` file format was reworked and modified to take a `length` parameter,
+and loading a 6502 file never really got any attention. I went ahead and [created an Issue
+and Pull Request in the Ghidra codebase](https://github.com/NationalSecurityAgency/ghidra/issues/864),
+and it was recently merged.
+
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
