@@ -228,6 +228,6 @@ prove me wrong :).
 In the end, you get some nice disassembly with graph code flow and even a decompilation into C
 code of Mario 3, which was written in assembly:
 
-![results]({{ site.baseurl }}/images/results.png)
+![results]({{ site.baseurl }}/images/ghidra-results.png)
 *Super Mario Bros. 3 IntReset Disassembly and Decompilation via Ghidra*
 {:.figure}
