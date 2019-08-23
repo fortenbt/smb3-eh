@@ -35,7 +35,7 @@ There were two versions of the Super Mario Bros. 3 US region cartridge: Rev 0
 and Rev 1. Their respective ROM files are suffixed `(U) (PRG0) [!]` and `(U) (PRG1) [!]`.
 The only major visual difference between the two are the names of the Worlds as shown
 during the end credits after beating the game. The different names are shown in the table
-below ^1.
+below.
 
 | **US (Revision 0)** | **US (Revision 1)** |
 |:-------------------:|:-------------------:|
