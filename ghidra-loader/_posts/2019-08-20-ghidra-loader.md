@@ -66,7 +66,12 @@ However, the 6502 processor only supports 16-bit addressing and was only designe
 peripherals are mapped at lower memory addresses. In order to fit the entire game's code in
 32 KB, the MMC3 mapper hardware was used within the cartridge. This extra hardware allowed
 the process of banking to occur, where running code could write to special registers on the
-cartridge to swap in and out specific banks of the PRG code when it needed them.
+cartridge to swap in and out specific banks of the PRG code when it needed them. The NES
+memory map is shown in the following figure.
+
+![nes-memory-map]({{ site.baseurl }}/images/nes-memory-map.png)
+*The NES CPU's Memory Map*
+{:.figure}
 
 In Super Mario Bros. 3, banks 30 and 31 are always present at addresses `0x8000-0x9FFF` and
 `0xE000-0xFFFF`, respectively. All the other banks are written to exist at either `0xA000-0xBFFF`
