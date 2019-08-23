@@ -14,7 +14,22 @@ I've completed a Ghidra loader that correctly maps in all the ROM's program bank
 at their respective addresses along with all of the symbols from the complete
 disassembly located [on GitHub](https://github.com/captainsouthbird/smb3).
 
-### Super Mario Bros. 3 NES ROM Versions
+This loader currently does not allow analysis flow into or out of banks that are
+swapped in/out during runtime (all banks but two), as described in the post below.
+
+For those unfamiliar with the Super Mario Bros. 3 speedrunning community, I have been
+doing reverse engineering and understanding the mechanics behind much of Super Mario
+Bros. 3 for the past year in order to find glitches or exploit logic in the game so as
+to support the top tier runners and their attempts to lower the world record times.
+
+I helped develop the [Early Hammer Manipulation](https://smb3.bf0.org/eh-manipulation/) and
+had a part in developing many of the new tech features in MitchFlowerPower's](https://twitch.tv/mitchflowerpower)
+ROM hack, [Mini Kaizo Bros. 3](https://smb3p.kafuka.org/thread.php?id=11).
+
+The Super Mario Bros. 3 NES ROM Ghidra Loader source can be found on my GitHub at
+https://github.com/fortenbt/Ghidra-SMB3INES-Loader
+
+## Super Mario Bros. 3 NES ROM Versions
 
 There were two versions of the Super Mario Bros. 3 US region cartridge: Rev 0
 and Rev 1. Their respective ROM files are suffixed `(U) (PRG0) [!]` and `(U) (PRG1) [!]`.
@@ -39,7 +54,7 @@ Captain Southbird's disassembly assembles byte-for-byte into the PRG1 version of
 ROM, and therefore the symbols and their addresses in the loader are matched to that
 ROM.
 
-### MMC3 Mapper and Banking
+## MMC3 Mapper and Banking
 
 The total size of the Super Mario Bros. 3 NES ROM is 393,232 bytes. There is a 16-byte INES
 header followed by the actual cartridge contents. The cartridge contents are broken up into
@@ -60,7 +75,7 @@ or `0xC000-0xDFFF`. This can easily be seen in Southbird's complete disassembly 
 uses the `.include` and `.org` macros to include the PRG bank files assembled at specific base
 addresses.
 
-### Ghidra Memory Blocks
+## Ghidra Memory Blocks
 
 When beginning to write the Ghidra Loader, I was completely new to their API and really had no
 idea how I was meant to go about loading in each bank. I referenced multiple open source loaders
@@ -122,167 +137,97 @@ and loading a 6502 file never really got any attention. I went ahead and [create
 and Pull Request in the Ghidra codebase](https://github.com/NationalSecurityAgency/ghidra/issues/864),
 and it was recently merged.
 
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
+### Overlay Memory Blocks and Virtual Addresses
 
-![Finding About]({{ site.baseurl }}/images/fceux-about.png)
-*The version of FCEUX can be found in its About menu.*
-{:.figure}
+After getting the default memory blocks to load without errors, the memory blocks I created were
+erroring out for the same reason. You apparently could not have multiple memory blocks defined that
+overlapped each other at the same virtual address. After looking over the API a bit more, I found
+that the MemoryBlock creation method took a Boolean argument called `overlay`. I wasn't sure what
+this was, and there was no documentation describing it, but it sounded like exactly what I wanted.
 
-![FCEUX version]({{ site.baseurl }}/images/fceux-about-box.png)
-*FCEUX version 2.2.3*
-{:.figure}
+Sure enough, when the memory blocks were overlay `MemoryBlock`s, multiple of them could be placed
+at a single virtual address without error.
 
-The TAS was made for the PRG0 version of the Super Mario Bros. 3 ROM. Although
-there are very few substantive changes between the two ROMs, they have been
-known to desynch from the TAS if the wrong ROM is used.
+### Overlay Memory Block Limitations
 
-The Lua script is a script that was written for FCEUX's Lua API. It draws
-transparent boxes across the top of the screen that fill in once the jump frame is
-getting close. By default, the script draws 9 boxes and waits 45 frame between each
-box filling in. These values, as well as the size of the boxes are easily changed
-by modifying the values at the top of the script to allow a speedrunner to customize
-it to their liking:
+The only way to load multiple binaries in at the same virtual address (as far as I could tell), was
+to use overlay `MemoryBlock`s. After placing each bank in a new overlay memory block and disassembling,
+I realized that if code within an overlay block accessed memory outside of that block, even if that
+memory was not in an overlay block, the disassembly code flow would not follow. It did appear that
+data symbols were resolved successfully, though.
 
-```lua
--- Allows you to adjust how many frames between each box being filled in
-local countdown_delay = 45
+Therefore, any calls to or from the banks that are swapped out are still not resolved. I don't know of
+a way to fix this currently. To maximize the amount of logic flow, I created non-overlay memory blocks
+for banks 30 and 31, since those are never swapped out.
 
-local goodframe_2_1 = 17821 -- 688 lag, 289 ingame clock, 18212 end of level lag frame
-local goodframe_2_2 = 19725 -- 773 lag, 285 ingame clock, 20207 end of level lag frame
-local goodframe_2_f = 22672 -- 872 lag, 277 ingame clock, 23079 end of level lag frame
+## Symbols
 
-local screen_width  = 0x10 --256 pixels, 16 blocks
-local screen_height = 0x0F --240 pixels, 15 blocks
-
--- Allows you to adjust how many boxes to display on screen
-local nboxes = 9
-
--- Allows you to adjust how big the boxes are
-local box_size = 20
-local space_size = 5
-local box_y = 20
-```
-*Listing 1: The Lua script configuration variables*
-{:.figure}
-
-### Loading the TAS
-
-The TAS can be loaded using FCEUX's `File...Movie...Play Movie` menu. You can click
-the dropdown, click `Browse`, and then navigate to where you downloaded the TAS.
-
-![Play Movie]({{ site.baseurl }}/images/play-movie.png)
-*FCEUX's Play Movie menu*
-{:.figure}
-
-![Loading the TAS]({{ site.baseurl }}/images/browse-fm2.png)
-*Loading the No-Death Early Hammer TAS*
-{:.figure}
-
-### Loading the Lua Script
-
-Once the TAS is loaded, you can load the Lua script by going to
-`File...Lua...New Lua Script Window...`. On the window that comes up, click `Browse`,
-and navigate to where you downloaded the Lua script, select it, and click `Open`.
-Finally, click `Run`. Make sure you are running the correct Lua script for version of
-the TAS you are running so that the boxes match up with the frames on which to jump
-to get the correct hammer brother movements.
-
-![New lua script]({{ site.baseurl }}/images/new-lua-script.png)
-*FCEUX's new lua script menu*
-{:.figure}
-
-![Load lua]({{ site.baseurl }}/images/load-lua.png)
-*Browsing to the Early Hammer helper Lua script*
-{:.figure}
-
-![Run lua]({{ site.baseurl }}/images/run-lua.png)
-*Click Run to start the Lua script*
-{:.figure}
-
-### The Two Current TASes
-
-The two TASes and Lua scripts I am releasing right now are versions `v0.4` and `v0.5`.
-I am not numbering them `v1.0` yet, as I am still not satisfied that they're as good
-as they can be.
-
-Because of github- and my jekyll theme-related issues, I haven't been able to get the
-links below to download the files. You can right click the orange arrow next to the
-images and choose "Save link as..." in order to save the files.
-
-![Save link as]({{ site.baseurl }}/images/right-click.png)
-*Right click and Save link as...*
-{:.figure}
-
-#### v0.4
-
-`v0.4` is the version of the TAS that [Mitchflowerpower](https://twitch.tv/mitchflowerpower)
-used to achieve the [current world record for Warpless](https://www.twitch.tv/videos/365679017)
-in January 2019 with a 50:36.
-
-The frame windows achieved in this TAS are shown below. The frames marked with an asterisk (`*`)
-are the frames on which the TAS jumps. A frame labeled `good` is one where the hammer brothers
-move as-desired if you press jump to get the card on that frame. A frame marked `bad` is one
-where the hammer brothers move incorrectly.
+Because of the huge amount of work Captain Southbird put into the disassembly, there are symbols for
+almost every function, data, and RAM variable in the game. The only file that contains all these
+symbols and their addresses, however, is one created during assembly of the game, called `smb3.fns`.
+This file contains a complete listing of every symbol and its address, in the following form:
 
 ```
-2-1: [good, bad, good*, good]
-2-2: [good, good*, good]
-2-f: [good*, bad, good]
+; smb3.asm
+Music_Sq2NoteOn                  = $E53D
+PRG030_8E24                      = $8E24
+Video_3CMAppear2                 = $830D
+Inventory_DoPowerupUse           = $A40E
+PRG024_BCD4                      = $BCD4
+TAndK_DrawDiagBox                = $A0A7
+Card_CursorYs                    = $D6E1
+HostToad_SpriteYs_End            = $C714
+UnusedBRL                        = $A930
+; 11,500+ more lines...
+; ...
 ```
 
-<a href="https://raw.githubusercontent.com/fortenbt/smb3-eh/master/tas/v0.4/orange-nodeath-eh-v0.4.fm2" download>
-    <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
-</a>
-*v0.4 TAS*
+As you can see, only symbols and addresses are present. This didn't really help me, because I needed to
+know which bank those symbols were from in order to apply the symbol to the correct overlay memory block.
+
+I wrote [a Python script](https://github.com/fortenbt/Ghidra-SMB3INES-Loader/blob/master/scripts/ParseSMB3Symbols.py)
+that parses each source assembly file for symbols and keeps track of which bank they were in. It then
+cross-references the list of symbols with the `smb3.fns` file to find the virtual address of the symbol
+in order to apply both the bank and the address to create the label in Ghidra. The Python script actually
+creates 32 `.java` files, one for each bank, that can be included directly in the Loader code.
+
+NOTE: Please don't judge the terrible Python script performance. I do realize I'm calling `re.search`
+in probably some O(n^2) way, but I knew it was correct and just wanted my symbols :P.
+
+## A Generic INES ROM Loader
+
+I started this project with the goal of creating a generic INES ROM loader. I hadn't really thought
+it all the way through, but I guessed that it would probably be possible. When I really got into it,
+though, I realized that it's just not possible due to how all the different mappers work and how
+every game can pick different banks to be loaded at different places. In order to get it to work
+generically for every game, some scanning/emulating would have to be done in order to tell which banks were
+mapped in where at runtime.
+
+That being said, this loader could be made a little more generic by taking a configuration file that
+specifies all the banks and their virtual memory addresses. In that case, 
+
+### Couldn't You Use Segment Registers with a Custom Processor?
+
+I thought about this. I'm pretty sure you can't. Please give me your thoughts/pull requests if you
+believe I'm wrong.
+
+Segment registers are used to specify a segment of memory by using it as an offset into a single
+linear address space. If the entire ROM were mapped linearly, and then the MMC3 banking writes
+that occurred in code at runtime were applied to an emulated segment register, proper code flow
+_might_ be able to be achieved throughout the ROM banks. But I think any statically initialized
+pointers would probably be wrong.
+
+Another very basic reason this may not ever be able to be done is for the same reason that
+mappers were created to begin with. The game is larger than the 64 KB of address space that is
+addressable by the 6502 processor. I don't know how you would go about emulating a segment register
+in a linear address space that's larger than the processor can handle. Good luck if you want to
+prove me wrong :).
+
+## Results
+
+In the end, you get some nice disassembly with graph code flow and even a decompilation into C
+code of Mario 3, which was written in assembly:
+
+![results](results.png)
+*Super Mario Bros. 3 IntReset Disassembly and Decompilation via Ghidra*
 {:.figure}
-
-<a href="https://raw.githubusercontent.com/fortenbt/smb3-eh/master/tas/v0.4/eh-helper-v0.4.lua" download>
-    <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
-</a>
-*v0.4 Lua script*
-{:.figure}
-
-#### v0.5
-
-`v0.5` removes the delag strategies in 1-1 and assumes a 4-frame lag. It does this to make
-up some time lost in World 2 in order to get longer frame windows. It is overall about 4
-seconds slower than `v0.4`.
-
-```
-2-1: [good, bad, good, bad, good*, good]
-2-2: [good, good*, good, good]
-2-f: [good*, bad, good]
-```
-
-<a href="https://raw.githubusercontent.com/fortenbt/smb3-eh/master/tas/v0.5/orange-nodeath-eh-v0.5.fm2" download>
-    <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
-</a>
-*v0.5 TAS*
-{:.figure}
-<a href="https://raw.githubusercontent.com/fortenbt/smb3-eh/master/tas/v0.5/eh-helper-v0.5.lua" download>
-    <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
-</a>
-*v0.5 Lua script*
-{:.figure}
-
-### Using the TASes
-
-In order to use the TAS successfully, you must do a couple things:
-
-First, your NES or emulator must be started at the exact same time as the emulator that is
-playing the TAS. If these are desynched at all, you'll be a frame or more off, giving you
-less of a chance of getting the manipulation.
-
-Second, it is not crucial for your gameplay to try to emulate the TAS's outside of delag
-strats. Obviously, you'll want to use the same delag strats as the TAS uses, but any other
-strategies to get ahead of the TAS are completely fine. However, this is only applicable
-up to World 2. When you start World 2, you need to try to enter 2-1 at the same time as
-the TAS. Due to the [in-game timer effects]({{ site.baseurl}}/eh-manipulation/2019-01-25-end-level-card/),
-you need to hit the card at the end of the level with the same in-game timer that the TAS
-does. The easiest way to achieve this is to attempt to enter the level at the same time.
-
-Mitch [posted a good tutorial on Early Hammer Manipulation](https://www.youtube.com/watch?v=2syj3j0Ye_E).
