@@ -6,7 +6,7 @@ description: >
   A loader specifically for loading the PRG1 version of
   the Super Mario Bros. 3 NES ROM with all the symbols
   from Captain Southbird's full disassembly.
-image: ghidra-bros-3.png
+image: /images/ghidra-bros-3.png
 categories: ghidra-plugin
 ---
 
@@ -228,6 +228,6 @@ prove me wrong :).
 In the end, you get some nice disassembly with graph code flow and even a decompilation into C
 code of Mario 3, which was written in assembly:
 
-![results](results.png)
+![results]({{ site.baseurl }}/images/results.png)
 *Super Mario Bros. 3 IntReset Disassembly and Decompilation via Ghidra*
 {:.figure}
