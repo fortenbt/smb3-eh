@@ -29,7 +29,7 @@ ROM hack, [Mini Kaizo Bros. 3](https://smb3p.kafuka.org/thread.php?id=11).
 ## TL;DR, Just Give Me the Code
 
 The Super Mario Bros. 3 NES ROM Ghidra Loader source can be found on my GitHub at
-https://github.com/fortenbt/Ghidra-SMB3INES-Loader
+[https://github.com/fortenbt/Ghidra-SMB3INES-Loader](https://github.com/fortenbt/Ghidra-SMB3INES-Loader)
 
 ## Super Mario Bros. 3 NES ROM Versions
 
