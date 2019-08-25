@@ -26,6 +26,8 @@ I helped develop the [Early Hammer Manipulation](https://smb3.bf0.org/eh-manipul
 had a part in developing many of the new tech features in [MitchFlowerPower](https://twitch.tv/mitchflowerpower)'s
 ROM hack, [Mini Kaizo Bros. 3](https://smb3p.kafuka.org/thread.php?id=11).
 
+## TL;DR, Just Give Me the Code
+
 The Super Mario Bros. 3 NES ROM Ghidra Loader source can be found on my GitHub at
 https://github.com/fortenbt/Ghidra-SMB3INES-Loader
 
@@ -79,6 +81,10 @@ or `0xC000-0xDFFF`. This can easily be seen in Southbird's complete disassembly 
 [`smb3.asm` file](https://github.com/captainsouthbird/smb3/blob/master/smb3.asm#L4653), which
 uses the `.include` and `.org` macros to include the PRG bank files assembled at specific base
 addresses.
+
+![bank-mapping]({{ site.baseurl }}/images/bank-mapping.png)
+*Only banks 30 and 31 are permanently mapped into RAM*
+{:.figure}
 
 ## Ghidra Memory Blocks
 
@@ -142,6 +148,10 @@ and loading a 6502 file never really got any attention. I went ahead and [create
 and Pull Request in the Ghidra codebase](https://github.com/NationalSecurityAgency/ghidra/issues/864),
 and it was recently merged.
 
+![bank-mapping]({{ site.baseurl }}/images/6502-ghidra-pull-request-merged.png)
+*The fixed default memory blocks will be in Ghidra version 9.1*
+{:.figure}
+
 ### Overlay Memory Blocks and Virtual Addresses
 
 After getting the default memory blocks to load without errors, the memory blocks I created were
@@ -164,6 +174,10 @@ data symbols were resolved successfully, though.
 Therefore, any calls to or from the banks that are swapped out are still not resolved. I don't know of
 a way to fix this currently. To maximize the amount of logic flow, I created non-overlay memory blocks
 for banks 30 and 31, since those are never swapped out.
+
+![no-code-flow]({{ site.baseurl }}/images/no-code-flow.png)
+*A call into a swappable bank or overlay memory block is not resolved*
+{:.figure}
 
 ## Symbols
 
