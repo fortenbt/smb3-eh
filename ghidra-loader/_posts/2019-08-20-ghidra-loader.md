@@ -23,7 +23,7 @@ Bros. 3 for the past year in order to find glitches or exploit logic in the game
 to support the top tier runners and their attempts to lower the world record times.
 
 I helped develop the [Early Hammer Manipulation](https://smb3.bf0.org/eh-manipulation/) and
-had a part in developing many of the new tech features in MitchFlowerPower's](https://twitch.tv/mitchflowerpower)
+had a part in developing many of the new tech features in [MitchFlowerPower](https://twitch.tv/mitchflowerpower)'s
 ROM hack, [Mini Kaizo Bros. 3](https://smb3p.kafuka.org/thread.php?id=11).
 
 The Super Mario Bros. 3 NES ROM Ghidra Loader source can be found on my GitHub at
