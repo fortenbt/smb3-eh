@@ -209,7 +209,10 @@ generically for every game, some scanning/emulating would have to be done in ord
 mapped in where at runtime.
 
 That being said, this loader could be made a little more generic by taking a configuration file that
-specifies all the banks and their virtual memory addresses. In that case, 
+specifies all the banks and their virtual memory addresses. In that case, more work could be
+done to look at mapper specification in the INES header and parse which banks are permanent and which
+addresses are swappable. Or that information could be supplied as well in the configuration file.
+Using a configuration file like this could allow a fairly generic Ghidra loader to work with most games.
 
 ### Couldn't You Use Segment Registers with a Custom Processor?
 
