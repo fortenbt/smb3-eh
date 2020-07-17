@@ -3,18 +3,17 @@
 layout: list
 
 # The title of the tag's page.
-title: Super Mario Bros. 3 Ghidra Loader
+title: Super Mario Bros. 3 ROM Hack Patches
 
 # The name of the tag, used in a post's front matter (e.g. tags: [<slug>]).
-slug: ghidra-loader
+slug: smb3-patches
 
 # (Optional) Write a short (~150 characters) description of this featured tag.
 description: >
-  I've completed a Ghidra loader that correctly maps in all the ROM's program banks
-  at their respective addresses along with all of the symbols from the complete
-  disassembly
+  This section will host each of the custom patches I make for the SMB3
+  ROM hacking community.
 
 # Setting `menu` will generate an entry in the sidebar for this tag.
 menu: true
-order: 2
+order: 1
 ---
