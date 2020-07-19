@@ -34,7 +34,7 @@ tagline:               >
   SMB3 Internals, Mechanics, and Exploitation
 
 # A list of keywords for your blog.
-keywords:              [smb3, rng exploitation, retro game mechanics, speedrun]
+keywords:              [smb3, rng exploitation, retro game mechanics, speedrun, rom hack]
 
 # Used by jekyll-seo-tag.
 logo:                  /assets/icons/logo.png
@@ -49,7 +49,7 @@ author:
 
 # This text will appear in a `<small>` tag in the footer of every page.
 copyright:             >
-  © 2019. All rights reserved.
+  © 2020. All rights reserved.
   0r4ng33xp0
 
 # Add links to the footer.
