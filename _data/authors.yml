@@ -3,13 +3,13 @@
 # You can change `author1` to your shortname.
 author1:
   # Replace <...> with your own (remove the < >)
-  name:              0r4ng3 3xp0
+  name:              Orange Expo
   email:             0r4ng33xp0@gmail.com
 
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    0r4ng3 got into the Super Mario Bros. 3 speedrunning scene in early 2018 and was
+    OrangeExpo got into the Super Mario Bros. 3 speedrunning scene in early 2018 and was
     fascinated by the array of clips, glitches, and mechanics behind the world record
     runs. He has been using Captain Southbird's [disassembly](http://sonicepoch.com/sm3mix/disassembly.html)
     to learn how the internals of the game work in order to facilitate runners with
