@@ -94,9 +94,10 @@ to get the correct hammer brother movements.
 *Click Run to start the Lua script*
 {:.figure}
 
-### The Two Current TASes
 
-The two TASes and Lua scripts I am releasing right now are versions `v0.4` and `v0.5`.
+### The Three TASes
+
+The three TASes and Lua scripts are versions `v0.4`, `v0.5`, `v0.7`.
 I am not numbering them `v1.0` yet, as I am still not satisfied that they're as good
 as they can be.
 
@@ -106,6 +107,34 @@ images and choose "Save link as..." in order to save the files.
 
 ![Save link as]({{ site.baseurl }}/images/right-click.png)
 *Right click and Save link as...*
+{:.figure}
+
+#### v0.7
+
+`v0.7` includes updates from Lui containing a moving purple box and more generous
+2-1 timing.
+
+The frame windows achieved in this TAS are shown below. The frames marked with an asterisk (`*`)
+are the frames on which the TAS jumps. A frame labeled `good` is one where the hammer brothers
+move as-desired if you press jump to get the card on that frame. A frame marked `bad` is one
+where the hammer brothers move incorrectly.
+
+```
+2-1: [good, bad, good*, good]
+2-2: [good, good*, good]
+2-f: [good*, bad, good]
+```
+
+<a href="https://raw.githubusercontent.com/fortenbt/smb3-eh/master/tas/v0.7/orange-nodeath-eh-v0.7.fm2" download>
+    <img src="{{ site.baseurl }}/images/flower-card.png" width="128" height="128">
+</a>
+*v0.7 TAS*
+{:.figure}
+
+<a href="https://raw.githubusercontent.com/fortenbt/smb3-eh/master/tas/v0.7/eh-helper-v0.7-purple.lua" download>
+    <img src="{{ site.baseurl }}/images/lua-logo.png" width="128" height="128">
+</a>
+*v0.7 Lua script*
 {:.figure}
 
 #### v0.4
